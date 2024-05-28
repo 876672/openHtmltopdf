@@ -29,8 +29,8 @@
 
 @font-face {
   font-family: 'EmbArial' !important;
-  src: url('/home/shubham/Documents/Reldyn-Project-Info/Reldyn-Baas-Info-BE/demo-project-practice/openhtmltopdf/src/main/resources/fonts/Arial.woff') format('woff'),
-       url('/home/shubham/Documents/Reldyn-Project-Info/Reldyn-Baas-Info-BE/demo-project-practice/openhtmltopdf/src/main/resources/fonts/ArialBold.woff') format('woff'),}
+  src: url('Arial.woff') format('woff'),
+       url('ArialBold.woff') format('woff'),}
 
 body {
   font-family: EmbArial;
