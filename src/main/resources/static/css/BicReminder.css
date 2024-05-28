@@ -1,0 +1,37 @@
+.header {
+  margin-top: 20px;
+  text-align:center;
+  background: orange;
+ position: running(header);
+}
+@page {
+  margin: 100px;
+  size: A4;
+  font-family: EmbArial !important;
+  margin-left: 80px;
+  margin-right: 60px;
+ 
+  @bottom-left {
+    background: blue;
+    content: element(footer);
+  }
+ 
+  @top-left {
+    content: element(header);
+  }
+}
+
+
+.footer {
+  position: running(footer);
+}
+
+
+@font-face {
+  font-family: 'EmbArial' !important;
+  src: url('/home/shubham/Documents/Reldyn-Project-Info/Reldyn-Baas-Info-BE/demo-project-practice/openhtmltopdf/src/main/resources/fonts/Arial.woff') format('woff'),
+       url('/home/shubham/Documents/Reldyn-Project-Info/Reldyn-Baas-Info-BE/demo-project-practice/openhtmltopdf/src/main/resources/fonts/ArialBold.woff') format('woff'),}
+
+body {
+  font-family: EmbArial;
+}
