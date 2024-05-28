@@ -20,7 +20,7 @@ public class OpenhtmltopdfService {
 	 */
 	public void generatePdf(String fileName) throws IOException {
 
-		File htmlFile = new File("src/main/resources/static/demo.html");
+		File htmlFile = new File("src/main/resources/static/BicReminderCL01.html");
 
 		if (!htmlFile.exists()) {
 			System.out.println("========= HTML file not found ===========");
