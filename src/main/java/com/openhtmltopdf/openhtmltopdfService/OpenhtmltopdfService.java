@@ -27,8 +27,10 @@ public class OpenhtmltopdfService {
 			throw new FileNotFoundException("HTML file not found: " + htmlFile.getAbsolutePath());
 		}
 
+		 //  handle the HTML to PDF conversion
 		PdfRendererBuilder builder = new PdfRendererBuilder();
-
+       
+		// specify the HTML file that you want to convert to a PDF
 		builder.withFile(htmlFile);
 		OutputStream outputStream = new FileOutputStream("target/" + fileName + ".pdf");
 		builder.toStream(outputStream);
