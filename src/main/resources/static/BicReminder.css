@@ -1,8 +1,7 @@
 .header {
   margin-top: 20px;
-  text-align:center;
-  background: orange;
- position: running(header);
+  text-align:left;
+  position: running(header);
 }
 @page {
   margin: 100px;
@@ -11,11 +10,12 @@
   margin-left: 80px;
   margin-right: 60px;
  
-  @bottom-left {
-    background: blue;
+  @bottom-right {
     content: element(footer);
+    content: "Page " counter(page) " of " counter(pages);
+    
   }
- 
+  
   @top-left {
     content: element(header);
   }
