@@ -1,37 +1,86 @@
 .header {
-  margin-top: 20px;
-  text-align:left;
-  position: running(header);
+	margin-top: 20px;
+	text-align: left;
+	position: running(header);
 }
+
 @page {
-  margin: 100px;
-  size: A4;
-  font-family: EmbArial !important;
-  margin-left: 80px;
-  margin-right: 60px;
- 
-  @bottom-right {
-    content: element(footer);
-    content: "Page " counter(page) " of " counter(pages);
-    
-  }
-  
-  @top-left {
-    content: element(header);
-  }
+	margin: 100px;
+	size: A4;
+	font-family: EmbArial !important;
+	margin-left: 80px;
+	margin-right: 60px; 
+	@bottom-right { content : element( footer);
+	content: "Page " counter(page) " of " counter(pages);
+}
+
+@top-left {
+	content: element(header);
+}
+
+}
+.footer {
+	position: running(footer);
 }
 
 
-.footer {
-  position: running(footer);
+
+
+@font-face {
+	font-family: EmbArial;
+	src: url("Arial.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: EmbArialBold;
+	src: url("ArialBold.ttf")
+		format("truetype");
+}
+
+@font-face {
+	font-family: EmbArialItalic;
+	src: url("ArialItalic.ttf")
+		format("truetype");
+}
+
+
+
+@font-face {
+	font-family: EmbArialItalicBold;
+	src: url("ArialItalicBold.ttf")
+		format("truetype");
 }
 
 
 @font-face {
-  font-family: 'EmbArial' !important;
-  src: url('Arial.woff') format('woff'),
-       url('ArialBold.woff') format('woff'),}
+	font-family: IBMPlexMonoBold;
+	src: url("IBMPlexMono-Bold.ttf")
+		format("truetype");
+}
+
+@font-face {
+	font-family: IBMPlexMonoBoldItalic;
+	src: url("IBMPlexMono-BoldItalic.ttf")
+		format("truetype");
+}
+
+
+
+@font-face {
+	font-family: IBMPlexMonoRegular;
+	src: url("IBMPlexMono-Regular.ttf")
+		format("truetype");
+}
+
+
+
+
+
 
 body {
-  font-family: EmbArial;
+	font-family: EmbArial;
+}
+
+body {
+	font-family: EmbArial;
 }

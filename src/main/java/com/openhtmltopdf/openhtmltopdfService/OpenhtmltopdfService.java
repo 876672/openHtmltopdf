@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import org.springframework.stereotype.Service;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
+import com.openhtmltopdf.svgsupport.BatikSVGDrawer;
 
 
 @Service
@@ -29,9 +30,11 @@ public class OpenhtmltopdfService {
 
 		 //  handle the HTML to PDF conversion
 		PdfRendererBuilder builder = new PdfRendererBuilder();
-       
+		builder.useSVGDrawer(new BatikSVGDrawer());
+
 		// specify the HTML file that you want to convert to a PDF
 		builder.withFile(htmlFile);
+		
 		OutputStream outputStream = new FileOutputStream("target/" + fileName + ".pdf");
 		builder.toStream(outputStream);
 
