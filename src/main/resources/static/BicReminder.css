@@ -72,7 +72,25 @@
 		format("truetype");
 }
 
+#inputTable {
+   width: 100%;
+   border-collapse: collapse;
+}
 
+#inputTable td, #inputTable th {
+   border: 1px solid #ddd;
+   padding: 8px;
+}
+
+#inputTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#inputTable th {
+   padding-top: 12px;
+   padding-bottom: 12px;
+   text-align: left;
+   background-color: #4CAF50;
+   color: white;
+}
 
 
 

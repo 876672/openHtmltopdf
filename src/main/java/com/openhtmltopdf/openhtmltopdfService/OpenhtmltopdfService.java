@@ -62,7 +62,7 @@ public class OpenhtmltopdfService {
 			try (PDDocument doc = PDDocument.load(new File("target/" + fileName + ".pdf"))) {
 				AccessPermission accessPermission = new AccessPermission();
 				accessPermission.setCanExtractContent(true);
-				accessPermission.setCanModify(true);
+				accessPermission.setCanModify(false);
 				accessPermission.setCanModifyAnnotations(true);
 				accessPermission.setCanPrint(true);
 				accessPermission.setCanPrintDegraded(true);
@@ -84,18 +84,25 @@ public class OpenhtmltopdfService {
 				for (PDField field : acroFormFields) {
 	                System.out.println("field----------------"+field);
 					if (field.getFullyQualifiedName().equals("name")) {
-						field.setReadOnly(true);
-						field.setValue("Pin code :- 517849");
-						field.getAcroForm().flatten();
+						field.setValue("shubham");
 
 					}
 					if (field.getFullyQualifiedName().equals("lastname")) {
-						field.setReadOnly(true);
-						field.setValue("shubham");
-						field.getAcroForm().flatten();
+						field.setValue("sakhare");
 
 					}
 					
+					if (field.getFullyQualifiedName().equals("age")) {
+						field.setValue("26");
+
+					}
+					
+					if (field.getFullyQualifiedName().equals("address")) {
+						field.setValue("at.pune");
+
+					}
+					field.getAcroForm().flatten();
+
 
 				}
 
