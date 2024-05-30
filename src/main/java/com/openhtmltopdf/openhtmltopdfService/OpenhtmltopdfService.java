@@ -39,15 +39,13 @@ public class OpenhtmltopdfService {
 
 		Bank bank = new Bank();
 		bank.setCardNum("2683");
-		bank.setAccNum("0000000000000000000007878");
+		bank.setAccNum("00000000000007878");
 		bank.setAccBalance("1119.34");
-		
+
 		Map<String, Object> data = new HashMap<>();
 		data.put("cardNum", bank.getCardNum());
 		data.put("accNum", bank.getAccNum());
 		data.put("accBalance", bank.getAccBalance());
-
-
 
 		String processedHtml = processTemplate(htmlContent, data);
 
@@ -84,7 +82,8 @@ public class OpenhtmltopdfService {
 				for (PDField field : acroFormFields) {
 					if (field.getFullyQualifiedName().equals("name")) {
 						field.setReadOnly(true);
-						field.setValue("shubham");
+						field.setValue("Pin code :- 517849");
+
 					}
 
 				}
