@@ -38,9 +38,16 @@ public class OpenhtmltopdfService {
 				Files.readAllBytes(Paths.get("src/main/resources/templates/BicReminderCL01.html")));
 
 		Bank bank = new Bank();
-		bank.setName("sakhare");
+		bank.setCardNum("2683");
+		bank.setAccNum("0000000000000000000007878");
+		bank.setAccBalance("1119.34");
+		
 		Map<String, Object> data = new HashMap<>();
-		data.put("name", bank.getName());
+		data.put("cardNum", bank.getCardNum());
+		data.put("accNum", bank.getAccNum());
+		data.put("accBalance", bank.getAccBalance());
+
+
 
 		String processedHtml = processTemplate(htmlContent, data);
 
