@@ -57,7 +57,6 @@ public class OpenhtmltopdfService {
 		try (OutputStream outputStream = new FileOutputStream("target/" + fileName + ".pdf")) {
 
 			builder.toStream(outputStream);
-
 			builder.run();
 
 			try (PDDocument doc = PDDocument.load(new File("target/" + fileName + ".pdf"))) {
@@ -74,17 +73,29 @@ public class OpenhtmltopdfService {
 				StandardProtectionPolicy spp = new StandardProtectionPolicy("123", "123", accessPermission);
 				doc.protect(spp);
 				PDDocumentCatalog catalog = doc.getDocumentCatalog();
-
+				
+                 System.out.println("catalog----------------"+catalog.toString());
 				PDAcroForm form = catalog.getAcroForm();
+                System.out.println("form----------------"+form.toString());
 
 				List<PDField> acroFormFields = form.getFields();
+                System.out.println("acroFormFields----------------"+acroFormFields.toString());
 
 				for (PDField field : acroFormFields) {
+	                System.out.println("field----------------"+field);
 					if (field.getFullyQualifiedName().equals("name")) {
 						field.setReadOnly(true);
 						field.setValue("Pin code :- 517849");
+						field.getAcroForm().flatten();
 
 					}
+					if (field.getFullyQualifiedName().equals("lastname")) {
+						field.setReadOnly(true);
+						field.setValue("shubham");
+						field.getAcroForm().flatten();
+
+					}
+					
 
 				}
 
