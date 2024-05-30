@@ -5,7 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
@@ -28,66 +32,66 @@ public class OpenhtmltopdfService {
 	 * @param fileName the file name
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public void generatePdf(String fileName) throws IOException {
-		File htmlFile = new File("src/main/resources/static/BicReminderCL01.html");
+	public void generatePdf(String fileName) throws IOException, FileNotFoundException {
 
-		if (!htmlFile.exists()) {
-			System.out.println("========= HTML file not found ===========");
-			throw new FileNotFoundException("HTML file not found: " + htmlFile.getAbsolutePath());
-		}
+		String htmlContent = new String(
+				Files.readAllBytes(Paths.get("src/main/resources/templates/BicReminderCL01.html")));
 
-		// Initialize PdfRendererBuilder
+		Bank bank = new Bank();
+		bank.setName("sakhare");
+		Map<String, Object> data = new HashMap<>();
+		data.put("name", bank.getName());
+
+		String processedHtml = processTemplate(htmlContent, data);
+
 		PdfRendererBuilder builder = new PdfRendererBuilder();
 		builder.useSVGDrawer(new BatikSVGDrawer());
-	
-		// Set HTML file
-		builder.withFile(htmlFile);
 
-		// Setup output stream for the PDF
+		builder.withHtmlContent(processedHtml, "classpath:/static/");
+
 		try (OutputStream outputStream = new FileOutputStream("target/" + fileName + ".pdf")) {
+
 			builder.toStream(outputStream);
 
-			// Create PDF
 			builder.run();
 
 			try (PDDocument doc = PDDocument.load(new File("target/" + fileName + ".pdf"))) {
-               Bank bank =new Bank();
 				AccessPermission accessPermission = new AccessPermission();
-				accessPermission.setCanExtractContent(false);
-				accessPermission.setCanModify(false);
-				accessPermission.setCanModifyAnnotations(false);
-				accessPermission.setCanPrint(false);
-				accessPermission.setCanPrintDegraded(false);
-				accessPermission.setCanAssembleDocument(false);
-				accessPermission.setCanExtractForAccessibility(false);
-				accessPermission.setCanFillInForm(false);
+				accessPermission.setCanExtractContent(true);
+				accessPermission.setCanModify(true);
+				accessPermission.setCanModifyAnnotations(true);
+				accessPermission.setCanPrint(true);
+				accessPermission.setCanPrintDegraded(true);
+				accessPermission.setCanAssembleDocument(true);
+				accessPermission.setCanExtractForAccessibility(true);
+				accessPermission.setCanFillInForm(true);
+
 				StandardProtectionPolicy spp = new StandardProtectionPolicy("123", "123", accessPermission);
 				doc.protect(spp);
-
 				PDDocumentCatalog catalog = doc.getDocumentCatalog();
 
 				PDAcroForm form = catalog.getAcroForm();
 
 				List<PDField> acroFormFields = form.getFields();
 
-				System.out.println("acroFormFields" +acroFormFields);
-				
-				System.out.println(String.format("found %d acroFrom fields", acroFormFields.size()));
-
 				for (PDField field : acroFormFields) {
 					if (field.getFullyQualifiedName().equals("name")) {
 						field.setReadOnly(true);
 						field.setValue("shubham");
 					}
-					
-					
-					doc.save("target/" + fileName + ".pdf");
+
 				}
 
-				
-				
+				doc.save("target/" + fileName + ".pdf");
 			}
 		}
+	}
 
+	private String processTemplate(String html, Map<String, Object> data) {
+
+		for (Map.Entry<String, Object> entry : data.entrySet()) {
+			html = html.replace("{{" + entry.getKey() + "}}", entry.getValue().toString());
+		}
+		return html;
 	}
 }
