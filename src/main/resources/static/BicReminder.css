@@ -2,6 +2,7 @@
 	margin-top: 20px;
 	text-align: left;
 	position: running(header);
+	margin-bottom: 20px
 }
 
 @page {
@@ -14,14 +15,19 @@
 	content: "Page " counter(page) " of " counter(pages);
 }
 
-@top-left {
-	content: element(header);
-}
+
 
 }
+@page :first {
+  @top-left {
+    content: element(header);
+  }
+}
+
 .footer {
 	position: running(footer);
 }
+
 
 
 
